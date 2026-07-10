@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name": "PDF Sentence Navigator",
+    "version": "1.0.0",
+    "description": "TAB/SHIFT+TAB კლავიატურით წინადადებებში გადაადგილება PDF დოკუმენტში. მუშაობს მთლიანად ლოკალურად.",
+    "action": {
+        "default_title": "PDF Sentence Navigator - დააჭირეთ PDF ფაილის გასახსნელად"
+    },
+    "background": {
+        "service_worker": "background.js"
+    }
+}

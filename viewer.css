@@ -1,0 +1,140 @@
+:root {
+  --bg: #525659;
+  --toolbar-bg: #323639;
+  --toolbar-fg: #e8eaed;
+  --accent: #2563eb;
+  --highlight: rgba(255, 214, 0, 0.55);
+  --highlight-border: #ff9800;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+}
+
+#toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--toolbar-bg);
+  color: var(--toolbar-fg);
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.toolbar-left, .toolbar-right, .toolbar-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-btn {
+  background: var(--accent);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.file-btn input[type="file"] {
+  display: none;
+}
+
+.file-name {
+  opacity: 0.85;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#sentence-counter {
+  font-variant-numeric: tabular-nums;
+  background: #00000030;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+kbd {
+  background: #4b4f52;
+  border: 1px solid #6b6f72;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 12px;
+}
+
+#empty-state {
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#loading {
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+.hidden { display: none !important; }
+
+#pdf-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.page {
+  position: relative;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
+.page canvas {
+  display: block;
+}
+
+.textLayer {
+  position: absolute;
+  text-align: initial;
+  inset: 0;
+  overflow: clip;
+  opacity: 1;
+  line-height: 1;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  z-index: 0;
+}
+
+.textLayer span,
+.textLayer br {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+
+/* აქტიური (მონიშნული) წინადადების სპანები */
+.textLayer span.active-sentence {
+  background: var(--highlight);
+  border-radius: 2px;
+  outline: 1px solid var(--highlight-border);
+}

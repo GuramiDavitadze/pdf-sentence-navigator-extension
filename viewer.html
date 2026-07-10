@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8" />
+<title>PDF Sentence Navigator</title>
+<link rel="stylesheet" href="viewer.css" />
+</head>
+<body>
+  <header id="toolbar">
+    <div class="toolbar-left">
+      <label class="file-btn">
+        📂 <span>PDF ფაილის გახსნა</span>
+        <input type="file" id="file-input" accept="application/pdf" />
+      </label>
+      <span id="file-name" class="file-name"></span>
+    </div>
+
+    <div class="toolbar-center">
+      <span id="sentence-counter">წინადადება: —</span>
+    </div>
+
+    <div class="toolbar-right">
+      <span class="hint"><kbd>Tab</kbd> — შემდეგი &nbsp;·&nbsp; <kbd>Shift</kbd>+<kbd>Tab</kbd> — წინა</span>
+    </div>
+  </header>
+
+  <div id="loading" class="hidden">დოკუმენტი იტვირთება…</div>
+  <div id="empty-state">
+    <p>აირჩიეთ PDF ფაილი ღილაკით ზემოთ.</p>
+  </div>
+
+  <main id="pdf-container"></main>
+
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>
