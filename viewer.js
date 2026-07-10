@@ -1,9 +1,9 @@
-
-
 import * as pdfjsLib from "./lib/pdf.min.mjs";
 import { SentenceNavigator } from "./sentence-navigator.js";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = chrome.runtime.getURL("lib/pdf.worker.min.mjs");
+pdfjsLib.GlobalWorkerOptions.workerSrc = chrome.runtime.getURL(
+  "lib/pdf.worker.min.mjs",
+);
 
 const els = {
   container: document.getElementById("pdf-container"),
@@ -69,6 +69,7 @@ async function renderPdf(arrayBuffer, label) {
       await page.render({ canvasContext: ctx, viewport }).promise;
 
       const textContent = await page.getTextContent();
+
       const textLayer = new pdfjsLib.TextLayer({
         textContentSource: textContent,
         container: textLayerDiv,
@@ -77,6 +78,13 @@ async function renderPdf(arrayBuffer, label) {
       await textLayer.render();
 
       const spans = Array.from(textLayerDiv.querySelectorAll("span"));
+      spans.forEach((span) => {
+        const style = window.getComputedStyle(span);
+
+        span.dataset.fontSize = style.fontSize;
+        span.dataset.fontFamily = style.fontFamily;
+        span.dataset.fontWeight = style.fontWeight;
+      });
       allSpans.push(...spans);
     }
 
@@ -85,8 +93,7 @@ async function renderPdf(arrayBuffer, label) {
   } catch (err) {
     console.error(err);
     setStatus("შეცდომა დოკუმენტის ჩატვირთვისას");
-    els.container.innerHTML =
-      `<p style="color:white;max-width:600px;text-align:center">ვერ მოხერხდა PDF-ის ჩატვირთვა: ${escapeHtml(err.message || String(err))}</p>`;
+    els.container.innerHTML = `<p style="color:white;max-width:600px;text-align:center">ვერ მოხერხდა PDF-ის ჩატვირთვა: ${escapeHtml(err.message || String(err))}</p>`;
   } finally {
     showLoading(false);
   }
@@ -114,7 +121,9 @@ window.addEventListener(
       navigator_.next();
     }
 
-    setStatus(`წინადადება ${navigator_.currentIndex + 1} / ${navigator_.total}`);
+    setStatus(
+      `წინადადება ${navigator_.currentIndex + 1} / ${navigator_.total}`,
+    );
   },
-  { capture: true }
+  { capture: true },
 );

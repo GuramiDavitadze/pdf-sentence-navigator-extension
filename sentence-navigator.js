@@ -126,7 +126,7 @@ class SentenceNavigator {
     }
     var prevIndex;
     if (this.currentIndex < 0) {
-      prevIndex = this.total - 1; // დავიწყოთ ბოლოდან
+      prevIndex = this.total - 1; 
     } else {
       prevIndex = this.currentIndex - 1;
     }
